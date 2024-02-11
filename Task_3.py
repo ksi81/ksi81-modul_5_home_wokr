@@ -54,12 +54,15 @@ def display_log_counts(counts: dict):
         print(f"{level}: {count}")
 
 if __name__ == "__main__":
-    file_path = "/Users/serhiiklymenko/Documents/GoIT/Python/Hw_5/ksi81-module_5_home_work/logfile.log"
+    if len(sys.argv) < 2:
+        print("Введіть шлях до файлу логів.")
+        sys.exit(1)
     
+    file_path = sys.argv[1]
     logs = load_logs(file_path)
     
-    if len(sys.argv) == 2:
-        level = sys.argv[1]
+    if len(sys.argv) == 3:
+        level = sys.argv[2]
         filtered_logs = filter_logs_by_level(logs, level)
         counts = count_logs_by_level(filtered_logs)
         display_log_counts(counts)
